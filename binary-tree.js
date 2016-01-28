@@ -63,7 +63,6 @@ class BinaryTree {
 	// does nothing if passed data not found
 	// removes node which contains passed data
 	remove(data) {
-		console.log(this.root);
 		var currentNode = this.root,
 				parentNode = null,
 				replacementParent,
@@ -78,7 +77,6 @@ class BinaryTree {
 				parentNode = currentNode;
 				currentNode = currentNode.right;
 			} else {
-				console.log("remove was done: " + data);
 				countChildren = (currentNode.left === null ? 0 : 1) +
 												(currentNode.right === null ? 0 : 1);
 
@@ -86,7 +84,6 @@ class BinaryTree {
 					switch(countChildren){
 						case 0:
 							this.root = null;
-							console.log(this.root);
 							break;
 						case 1:
 							this.root = (currentNode.right === null ? currentNode.left : currentNode.right);
@@ -120,9 +117,6 @@ class BinaryTree {
 							}
 							break;
 						case 2:
-							console.log("+++");
-							console.log(currentNode);
-							console.log(parentNode);
 							replacement = currentNode.left;
 							replacementParent = currentNode;
 
@@ -146,7 +140,6 @@ class BinaryTree {
 							break;
 					}
 				}
-				console.log(this.root);
 				currentNode = false;
 			}
 		}
@@ -176,7 +169,6 @@ class BinaryTree {
 		this.traverse(function(node){
 			length++;
 		});
-		console.log(length);
 		return length;
 	}
 
