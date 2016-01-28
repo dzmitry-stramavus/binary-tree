@@ -35,7 +35,6 @@ class BinaryTree {
 				}
 			}
 		}
-
 	}
 
 	// returns true if passed data found in binary tree, otherwise if not
@@ -75,7 +74,6 @@ class BinaryTree {
 			} else {
 				countChildren = (currentNode.left === null ? 0 : 1) +
 												(currentNode.right === null ? 0 : 1);
-
 				if (currentNode === this.root){
 					switch(countChildren){
 						case 0:
@@ -141,6 +139,8 @@ class BinaryTree {
 		}
 	}
 
+	// this method is used to visit each node in the tree
+	// in order to calculate the size of a binary search tree
 	traverse(process) {
 		function inOrder(node){
 			if (node){
@@ -155,10 +155,10 @@ class BinaryTree {
 				}
 			}
 		}
-
 		inOrder(this.root);
 	}
 
+	// returns number of elements in tree
 	size() {
 		var length = 0;
 
@@ -170,6 +170,6 @@ class BinaryTree {
 
 	// returns true if tree is empty, false if not
 	isEmpty() {
-		return this.root == null;
+		return this.root === null;
 	}
 }
