@@ -7,11 +7,7 @@ class BinaryTree {
 
 	// creates new node with passed data and inserts it to correct place
 	insert(data) {
-		var node = {
-			data: data,
-			left: null,
-			right: null
-		};
+		var node = new Node(data, null, null);
 		var currentNode;
 
 		if (this.root === null){
