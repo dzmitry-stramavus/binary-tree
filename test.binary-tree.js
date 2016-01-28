@@ -150,7 +150,7 @@ describe('BinaryTree', () => {
 			bt.should.deep.equal(btCopy);
 
 			bt.remove(8);
-			btCopy.root.left = btCopy.root.left.left;
+			btCopy.root.left.left = btCopy.root.left.left.left;
 
 			bt.should.deep.equal(btCopy);
 		});
