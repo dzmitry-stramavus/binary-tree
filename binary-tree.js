@@ -63,6 +63,7 @@ class BinaryTree {
 	// does nothing if passed data not found
 	// removes node which contains passed data
 	remove(data) {
+		console.log(this.root);
 		var currentNode = this.root,
 				parentNode = null,
 				replacementParent,
@@ -77,6 +78,7 @@ class BinaryTree {
 				parentNode = currentNode;
 				currentNode = currentNode.right;
 			} else {
+				console.log("remove was done: " + data);
 				countChildren = (currentNode.left === null ? 0 : 1) +
 												(currentNode.right === null ? 0 : 1);
 
@@ -84,6 +86,7 @@ class BinaryTree {
 					switch(countChildren){
 						case 0:
 							this.root = null;
+							console.log(this.root);
 							break;
 						case 1:
 							this.root = (currentNode.right === null ? currentNode.left : currentNode.right);
@@ -117,18 +120,23 @@ class BinaryTree {
 							}
 							break;
 						case 2:
+							console.log("+++");
+							console.log(currentNode);
+							console.log(parentNode);
 							replacement = currentNode.left;
 							replacementParent = currentNode;
 
-							while(replacement.right !== null){
-								replacementParent = replacement;
-								replacement = replacement.right;
+							if (replacement.right !== null){
+								while(replacement.right !== null){
+									replacementParent = replacement;
+									replacement = replacement.right;
+								}
+								replacementParent.right = replacement.left;
+								replacement.right = currentNode.right;
+								replacement.left = currentNode.left;
+							} else {
+								replacement.right = currentNode.right;
 							}
-
-							replacementParent.right = replacement.left;
-
-							replacement.right = currentNode.right;
-							replacement.left = currentNode.left;
 
 							if (currentNode.data < parentNode.data){
 								parentNode.left = replacement;
@@ -138,13 +146,38 @@ class BinaryTree {
 							break;
 					}
 				}
+				console.log(this.root);
 				currentNode = false;
 			}
 		}
 	}
 
-	size() {
+	traverse(process) {
+		function inOrder(node){
+			if (node){
+				if (node.left !== null){
+					inOrder(node.left);
+				}
 
+				process.call(this, node);
+
+				if (node.right !== null){
+					inOrder(node.right);
+				}
+			}
+		}
+
+		inOrder(this.root);
+	}
+
+	size() {
+		var length = 0;
+
+		this.traverse(function(node){
+			length++;
+		});
+		console.log(length);
+		return length;
 	}
 
 	// returns true if tree is empty, false if not
